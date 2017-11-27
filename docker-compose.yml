@@ -1,0 +1,31 @@
+version: '3.2'
+
+services:
+  consul:
+    image: consul
+    networks:
+      test:
+        ipv4_address: "172.19.0.12"
+
+  producer:
+    build:
+      context: .
+      dockerfile: producer/Dockerfile
+    networks:
+      test:
+        ipv4_address: "172.19.0.10"
+
+  consumer:
+    build:
+      context: .
+      dockerfile: consumer/Dockerfile
+    networks:
+      test:
+        ipv4_address: "172.19.0.11"
+
+networks:
+  test:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16

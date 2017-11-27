@@ -1,0 +1,10 @@
+FROM golang:1.9
+
+RUN go get github.com/AsynkronIT/protoactor-go/... && \
+    cd $GOPATH/src/github.com/AsynkronIT/protoactor-go && \
+    go get ./... && \
+    make
+
+RUN go get github.com/stretchr/testify/assert
+
+RUN go get github.com/go-sql-driver/mysql
